@@ -59,6 +59,46 @@
 <h3>list</h3>
 <p><a href="https://youtu.be/h-1EQHuQwbI">https://youtu.be/h-1EQHuQwbI</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/h-1EQHuQwbI" width="560"></iframe></p>
+<p>顯示全部學員的倉儲及網站</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import html, document, ajax
+
+# 取得 brython_div1 DOM 元素
+brython_div1 = document["brython_div1"]
+
+# 設定學員資料的 URL
+url = "https://mde.tw/list/2b.txt"
+
+# 定義 AJAX 請求的回呼函式
+def on_complete(req):
+    if req.status == 200:
+        data = req.text.splitlines()  # 以換行符號分割成數列
+        if len(data) &gt; 1:  # 確保有資料
+            all_stud = data[1:]  # 跳過標題列
+            
+            brython_div1 &lt;= f"總共有 {len(all_stud)} 名學員"
+            brython_div1 &lt;= html.BR()
+            
+            # 依序處理每一筆學員資料
+            for stud in all_stud:
+                fields = stud.split()  # 假設資料是用空格分隔 (請確認你的資料格式)
+                if len(fields) &gt;= 2:  # 確保至少有 學號 和 帳號
+                    stud_id = fields[0]   # 學號
+                    account = fields[1]   # 帳號
+                    github_link = f"https://github.com/mdecd2025/hw-{stud_id}"
+                    
+                    # 顯示學號與帳號（兩者都附上超連結）
+                    brython_div1 &lt;= html.A(stud_id, href=github_link, target="_blank")  # 學號超連結
+                    brython_div1 &lt;= " "
+                    brython_div1 &lt;= html.A(account, href=github_link, target="_blank")  # 帳號超連結
+                    brython_div1 &lt;= html.BR()
+        else:
+            brython_div1 &lt;= "沒有學員資料可顯示"
+    else:
+        brython_div1 &lt;= "無法取得學員資料"
+
+# 發送 AJAX 請求
+ajax.get(url, oncomplete=on_complete)
+</pre>
 <p><a href="https://mdecd2025.github.io/hw-41223227/content/Brython.html?src=https://gist.githubusercontent.com/41223227/6f1ade85ded7a1e8e09fdd62de3cfcb1/raw/6f39e5dde8b2e822eeb098266270fc01d309fc51/g3*list">g3執行結果</a></p><h2>Task2</h2>
 <h2>Task3</h2>
 <h2>Task4</h2>
