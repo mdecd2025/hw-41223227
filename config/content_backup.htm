@@ -167,8 +167,19 @@ ajax.get(url, oncomplete=on_complete)
 <p><a href="https://youtube.com/shorts/PHtQKzFjNsc">https://youtube.com/watch?v=PHtQKzFjNsc</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/PHtQKzFjNsc" width="560"></iframe></p><h2>Task4</h2>
 <h3>w4</h3>
-<p>使用webot建立四連桿練習:<a href="https://youtu.be/XBE5bwX22Ro">https://youtu.be/XBE5bwX22Ro</a></p>
+<p>使用webot建立四連桿練習影片:<a href="https://youtu.be/XBE5bwX22Ro">https://youtu.be/XBE5bwX22Ro</a></p>
 <p>四連桿檔案:<a href="/downloads/box_fourbar4.zip">/downloads/box_fourbar.zip</a></p>
+<p><strong>建造平面四連桿的尺寸設計: 固定桿長度為 1m, 主動旋轉桿長度為 0.4m, 第二旋轉桿長度為 0.6m, 第三旋轉桿長度為 0.9m</strong></p>
+<p>1.建立robot群組</p>
+<p>2.robot下的children建立1個solid群組，2個higejoint群組，並選一個為首要，命名為joint1</p>
+<p>3.solid的children中建立shape作為固定桿(X1,Y0.1,Z0.1)</p>
+<p>4.<span>joint1下的endpoint選擇solid性質，命名為link1，並往下的children中建立pose及higejoint，pose下在建立shape為主動桿(0.4,0.1,0.1)</span><span>，shape命名為link1，再將主動桿所屬的pose的translation設為(0.2,0,0)(此為link1中心點)，而higejoint為主動桿與第二桿連接，並命名為joint2。</span></p>
+<p><span>5.joint1的endpoint下有translation(此為連接處的座標點)，設(-0.5,0,0.1)</span></p>
+<p><span>6.在joint1下有boundingObject，選擇pose，往下children選擇USE link1，並調整座標至(0.2,0,0)(與link1的pose座標一致)，在設置physics</span></p>
+<p>7.以上順序重複製作，主要為base--&gt;joint1--&gt;link1--&gt;<span>joint2--&gt;link2--&gt;</span><span>joint3--&gt;link3--&gt;joint4</span></p>
+<p><span>8.joint4在robot群組中的children，與joint1同排列，並將endpoint設為solidreference，並選為use link3</span></p>
+<p><span>9.每一階的joint中各有jointparameters、device、emdpoint，其中link1上的device要加入Rotationalmotor，並命名為motor</span></p>
+<p><span>10.而每一階的jointparameters，axis設為(0,0,1)(意為繞z軸旋轉)，但anchor要設為桿的長度，這樣才是joint到joint的距離，分別為(-0.5,0,0)、(0.4,0,0)、(0.6,0,0)，此座標是接續的，原點根據base的起點，另外設置的joint4則為(0.5,0,0)</span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/XBE5bwX22Ro" width="560"></iframe></p><h2>Task5</h2>
 <h2>Task6</h2>
 <h1>Midterm</h1>
