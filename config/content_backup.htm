@@ -251,6 +251,24 @@ ajax.get(url, oncomplete=on_complete)
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/my6NOWFFjGM" width="560"></iframe></p><h2>Exam2</h2>
 <p>Exam2 (10%): 利用 CAD 零組件建立模擬場景</p>
 <p>操作影片標題: 國立虎尾科技大學 - 機械設計工程系 - cd2025 Exam2 - 學員學號</p>
+<p>操作流程:</p>
+<p>利用solvespace將EXAM2的各個零件繪出，主動桿尺寸為127mm(學號後兩位)、從動桿為150、搖桿為170，而下面尺寸我設為180，四連桿角度則是27度</p>
+<p>將繪製好的零件組合在一起即完成solvespace的部分</p>
+<p>將stl檔轉成obj</p>
+<p>打開webot<span>加入背景，後面再新增Robot</span></p>
+<p><span>在Robot裡面的children加入Solid(取名為base)，再加入兩個HingeJoint，分別為joint1跟joint4</span></p>
+<p><span>在Solid裡面的children新增Cadshape</span></p>
+<p><span>在Cadshape裡面導入base零件</span></p>
+<p><span>開啟Mesh及physics</span></p>
+<p><span>在joint1裡面的endPoint加入Solid改成link1</span></p>
+<p><span>後續導入零件也依照上述方式進行操作就能完成四連桿連接操作</span></p>
+<p><span>在joint1裡面的jointParameters加入HingeJointParameters，修改axis0、0、1，修改anchor0、0、0</span></p>
+<p><br/><span>在joint2裡面的jointParameters加入HingeJointParameters，修改axis0、0、1，修改anchor1.1316、0.5766、0</span></p>
+<p><br/><span>在joint3裡面的jointParameters加入HingeJointParameters，修改axis0、0、1，修改anchor2.12、1.7022、0</span></p>
+<p><br/><span>在joint4裡面的endPoint加入SolidReference，並選擇link3</span></p>
+<p><span>在joint1裡面的device加入RotationalMotor，並改成motor</span></p>
+<p><br/><span>到Robot裡面的controller選擇fourbar_controller</span></p>
+<p><span>最後將其運轉即完成EXAM2作業</span></p>
 <p>solvespace繪製影片:</p>
 <p><a href="https://youtu.be/9Q9-pbHfN1A">https://youtu.be/9Q9-pbHfN1A</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/9Q9-pbHfN1A" width="560"></iframe></p>
